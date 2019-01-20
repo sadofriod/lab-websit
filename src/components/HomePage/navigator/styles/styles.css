@@ -1,0 +1,21 @@
+.container{
+    height: 61.5vh;
+    width: 100vw;
+    display: flex;
+}
+.description{
+    flex: 1;
+}
+.navigatorGroup{
+    flex: 5;
+    position: relative;
+}
+.navigatorItem{
+    position: absolute;
+    height: auto;
+}
+.navigatorItem:hover{
+    cursor: pointer;
+    transform: scale(1.25);
+    transition: transform 200ms;
+}
