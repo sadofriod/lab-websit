@@ -41,7 +41,19 @@ export default class Navigtor extends Component {
                 y: '',
                 size: '',
                 description:'Repositories page entry'
-            },],
+            }, {
+                name: 'Forum',
+                x: '',
+                y: '',
+                size: '',
+                description:'Repositories page entry'
+            }, {
+                name: 'Forum',
+                x: '',
+                y: '',
+                size: '',
+                description:'Forum page entry'
+            }],
             position: undefined
         }
     }
@@ -63,15 +75,19 @@ export default class Navigtor extends Component {
             if (index === 0) {
                 item.size = 44;
                 item.x = parseInt(target.offsetWidth / 2);
-                item.y = parseInt(target.offsetHeight / 2);
+                item.y = parseInt(target.offsetHeight / 2)-30;
                 centerPoint.x = item.x;
-                centerPoint.y = item.y;
-                col = parseInt(target.offsetHeight / 2)
+                centerPoint.y = item.y-30;
+                col = parseInt(target.offsetHeight / 2)-30
                 row = parseInt(target.offsetWidth / 2)
             } else {
                 item.x = num * index
-                item.y = Math.sqrt((col * col * row * row - col * col * Math.pow((item.x - centerPoint.x), 2)) / (row * row)) + centerPoint.y
-
+                let y = Math.sqrt((col * col * row * row - col * col * Math.pow((item.x - centerPoint.x), 2)) / (row * row)) + centerPoint.y
+                if(index%2 != 1){
+                    item.y =  2*col - y
+                }else{
+                    item.y = y;
+                }
             }
         });
         return ns;
@@ -81,7 +97,7 @@ export default class Navigtor extends Component {
         return p.map((item, index) => {
             return (
                 <div key={index} className={styles.navigatorItem} style={{
-                    top: item.y * 0.95-120 + 'px',
+                    top: item.y  + 'px',
                     left: item.x * 0.75 + 'px',
                     fontSize: item.size + 'px',
                 }}
@@ -90,7 +106,7 @@ export default class Navigtor extends Component {
                     {item.name}
                 </div>
             )
-        })
+        });
     }
     render() {
         return (
@@ -102,4 +118,4 @@ export default class Navigtor extends Component {
             </div>
         )
     }
-}
+} 
