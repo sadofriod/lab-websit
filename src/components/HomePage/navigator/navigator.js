@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'; 
 import styles from './styles/styles.css';
+import { getIconUrl, GET_GEAR_ICON_URL } from './actions';
 export default class Navigtor extends Component {
     constructor(props) {
         super(props);
