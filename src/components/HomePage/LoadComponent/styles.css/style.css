@@ -37,6 +37,10 @@
     text-align: center;
     animation: loadingBGAction 3s linear reverse;
     animation-iteration-count:infinite;
+    height: 30%;
+}
+.loadingWords img{
+    height: 100%;
 }
 @keyframes loadingBGAction {
     from {

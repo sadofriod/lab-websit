@@ -1,6 +1,7 @@
-import React, { Component } from 'react'; 
+import React, { Component } from 'react';
 import styles from './styles/styles.css';
-import { getIconUrl, GET_GEAR_ICON_URL } from './actions';
+import { getTipsContent } from '../NavigationTips/actions/tipsCotent'
+import store from '../../../stateManage/store';
 export default class Navigtor extends Component {
     constructor(props) {
         super(props);
@@ -11,49 +12,49 @@ export default class Navigtor extends Component {
                 x: '',
                 y: '',
                 size: '',
-                description:'Home page entry'
+                description: 'Home page entry'
             }, {
                 name: 'About',
                 x: '',
                 y: '',
                 size: '',
-                description:'About page entry'
+                description: 'About page entry'
             }, {
                 name: 'Blog',
                 x: '',
                 y: '',
                 size: '',
-                description:'Blog page entry'
+                description: 'Blog page entry'
             }, {
                 name: 'Factory',
                 x: '',
                 y: '',
                 size: '',
-                description:'Factory page entry'
+                description: 'Factory page entry'
             }, {
                 name: 'Tools',
                 x: '',
                 y: '',
                 size: '',
-                description:'Tools page entry'
+                description: 'Tools page entry'
             }, {
                 name: 'Repositories',
                 x: '',
                 y: '',
                 size: '',
-                description:'Repositories page entry'
+                description: 'Repositories page entry'
             }, {
-                name: 'Forum',
+                name: 'Private Forum',
                 x: '',
                 y: '',
                 size: '',
-                description:'Repositories page entry'
+                description: 'Private forum page entry'
             }, {
-                name: 'Forum',
+                name: 'Public Forum',
                 x: '',
                 y: '',
                 size: '',
-                description:'Forum page entry'
+                description: 'Public forum page entry'
             }],
             position: undefined
         }
@@ -63,7 +64,6 @@ export default class Navigtor extends Component {
         await this.setState({
             position: result
         });
-
     }
     navigtorsPosition = async () => {
         let ns = this.state.navigtors;
@@ -71,22 +71,22 @@ export default class Navigtor extends Component {
         let centerPoint = { x: 0, y: 0 }, col = 0, row = 0;
         let num = parseInt(target.offsetWidth / ns.length);
         await ns.map((item, index) => {
-            let random = (Math.random() + 1)*15;
+            let random = (Math.random() + 1) * 15;
             item.size = random;
             if (index === 0) {
                 item.size = 44;
                 item.x = parseInt(target.offsetWidth / 2);
-                item.y = parseInt(target.offsetHeight / 2)-30;
+                item.y = parseInt(target.offsetHeight / 2) - 30;
                 centerPoint.x = item.x;
-                centerPoint.y = item.y-30;
-                col = parseInt(target.offsetHeight / 2)-30
+                centerPoint.y = item.y - 30;
+                col = parseInt(target.offsetHeight / 2) - 30
                 row = parseInt(target.offsetWidth / 2)
             } else {
                 item.x = num * index
                 let y = Math.sqrt((col * col * row * row - col * col * Math.pow((item.x - centerPoint.x), 2)) / (row * row)) + centerPoint.y
-                if(index%2 != 1){
-                    item.y =  2*col - y
-                }else{
+                if (index % 2 != 1) {
+                    item.y = 2 * col - y
+                } else {
                     item.y = y;
                 }
             }
@@ -98,11 +98,29 @@ export default class Navigtor extends Component {
         return p.map((item, index) => {
             return (
                 <div key={index} className={styles.navigatorItem} style={{
-                    top: item.y  + 'px',
+                    top: item.y + 'px',
                     left: item.x * 0.75 + 'px',
                     fontSize: item.size + 'px',
                 }}
-                data-title={item.description}
+                    data-title={item.description}
+                    onMouseEnter={() => {
+                        store.dispatch(getTipsContent(
+                            {
+                                routeName: item.name.toLowerCase(),
+                                entry: true,
+                                url:require('../../../assets/' + item.name.toLowerCase() + '.png')
+                            }
+                        ));
+                    }}
+                    onMouseLeave={() => {
+                        store.dispatch(getTipsContent(
+                            {
+                                routeName: item.name.toLowerCase(),
+                                entry: false,
+                                url:require('../../../assets/' + item.name.toLowerCase() + '.png')
+                            }
+                        ));
+                    }}
                 >
                     {item.name}
                 </div>

@@ -1,14 +1,6 @@
 import { combineReducers } from 'redux';
-const gearIcon = (state = '', action) => {
-    switch (action.type) {
-        case 'URL':
-            console.log(action.url);
-            break;
-        default:
-            return state;
-    }
-}
+import { changeTipsContent } from '../components/HomePage/NavigationTips/reducers/changeTipsContent';
 const reducers = combineReducers({
-    gearIcon: gearIcon
+    changeTipsContent: changeTipsContent,
 })
 export default reducers

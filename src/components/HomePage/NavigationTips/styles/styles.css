@@ -1,0 +1,87 @@
+.container{
+    height: 30.5vh;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.content{
+    height: auto;
+    padding: 20px;
+    white-space: normal;
+    font-size: 24px;
+    width: 64%;
+    transform-origin: left;
+    transform: rotate(30deg);
+    opacity: 0.5;
+    border-left: 5px solid #000; 
+    animation: contentAction forwards 300ms;
+}
+.descriptionContent{
+    height: auto;
+    padding: 20px;
+    white-space: normal;
+    font-size: 24px;
+    width: 64%;
+    border-left: 5px solid #000; 
+    transform-origin: left;
+    animation: contentAction forwards 300ms;
+}
+
+.contentSwitch{
+    animation: contentHidden forwards 300ms;
+}
+@keyframes contentAction {
+    0%{
+        opacity: 0.5;
+        transform: rotate(30deg)
+    }
+    65%{
+        transform: rotate(-2deg)
+    }
+    100%{
+        opacity: 1;
+        transform: rotate(0deg)
+    }
+}
+@-webkit-keyframes contentAction{
+    0%{
+        opacity: 0.5;
+        transform: rotate(30deg)
+    }
+    65%{
+        transform: rotate(-2deg)
+    }
+    100%{
+        opacity: 1;
+        transform: rotate(0deg)
+    }
+}
+@keyframes contentHidden {
+    0%{
+        opacity: 1;
+        transform: rotate(0deg)
+    }
+    65%{
+        transform: rotate(2deg)
+    }
+    100%{
+        opacity: 0.5;
+        transform: rotate(-30deg)
+    }
+}
+@-webkit-keyframes contentHidden{
+    0%{
+        opacity: 1;
+        transform: rotate(0deg)
+    }
+    65%{
+        transform: rotate(2deg)
+    }
+    100%{
+        opacity: 0.5;
+        transform: rotate(-30deg)
+    }
+}
