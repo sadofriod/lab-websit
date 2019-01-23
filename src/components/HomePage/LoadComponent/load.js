@@ -11,7 +11,7 @@ export default class Load extends Component {
     componentDidMount() {
         const unsubscribe = store.subscribe(() => {
             let state = store.getState();
-            
+            console.log(state.changeTipsContent.url);
             this.setState({
                 url:state.changeTipsContent.url
             })

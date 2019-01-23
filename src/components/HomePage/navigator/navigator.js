@@ -56,7 +56,16 @@ export default class Navigtor extends Component {
                 size: '',
                 description: 'Public forum page entry'
             }],
-            position: undefined
+            position: undefined,
+            images: {
+                forum: require('../../../assets/forum.png'),
+                tools:require('../../../assets/tools.png'),
+                blog:require('../../../assets/blog.png'),
+                about:require('../../../assets/about.png'),
+                factory:require('../../../assets/factory.png'),
+                repositories:require('../../../assets/repositories.png'),
+                home:require('../../../assets/home.png')
+            }
         }
     }
     async componentDidMount() {
@@ -104,20 +113,27 @@ export default class Navigtor extends Component {
                 }}
                     data-title={item.description}
                     onMouseEnter={() => {
+                        if(item.name.indexOf(' ') !== -1){
+                            item.name = 'forum';
+                        }
+                        console.log(this.state.images[item.name.toLowerCase()])
                         store.dispatch(getTipsContent(
                             {
                                 routeName: item.name.toLowerCase(),
                                 entry: true,
-                                url:require('../../../assets/' + item.name.toLowerCase() + '.png')
+                                url: this.state.images[item.name.toLowerCase()]
                             }
                         ));
                     }}
                     onMouseLeave={() => {
+                        if(item.name.indexOf(' ') !== -1){
+                            item.name = 'forum';
+                        }
                         store.dispatch(getTipsContent(
                             {
                                 routeName: item.name.toLowerCase(),
                                 entry: false,
-                                url:require('../../../assets/' + item.name.toLowerCase() + '.png')
+                                url: this.state.images[item.name.toLowerCase()]
                             }
                         ));
                     }}
