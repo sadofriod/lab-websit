@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 var bodyParse = require('body-parser');
 var Config = require('./Config');
+var history = require('connect-history-api-fallback');
+
+app.use(history());
 
 var port = process.env.PORT || 3001;
 

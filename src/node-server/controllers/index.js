@@ -8,4 +8,12 @@ router.get('/', function(req, res){
     res.render('index');
 });
 
+router.post('/signIn', function(req, res){
+    res.render('index');
+});
+
+router.post('/signUp', function(req, res){
+    res.render('index');
+});
+
 module.exports = router;
