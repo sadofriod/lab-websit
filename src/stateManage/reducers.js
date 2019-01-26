@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { changeTipsContent } from '../components/HomePage/NavigationTips/reducers/changeTipsContent';
+import { changeTipsContent } from '../components/EntryPage/NavigationTips/reducers/changeTipsContent';
 const reducers = combineReducers({
     changeTipsContent: changeTipsContent,
 })

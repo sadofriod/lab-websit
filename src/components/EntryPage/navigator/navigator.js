@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import styles from './styles/styles.css';
 import { getTipsContent } from '../NavigationTips/actions/tipsCotent'
 import store from '../../../stateManage/store';
+import forum from '../../../assets/forum.png';
+import tools from '../../../assets/tools.png';
+import blog from '../../../assets/blog.png';
+import about from '../../../assets/about.png';
+import factory from '../../../assets/factory.png';
+import repositories from '../../../assets/repositories.png';
+import home from '../../../assets/home.png';
 export default class Navigtor extends Component {
     constructor(props) {
         super(props);
@@ -9,48 +16,56 @@ export default class Navigtor extends Component {
         this.state = {
             navigtors: [{
                 name: 'Home',
+                type:'home',
                 x: '',
                 y: '',
                 size: '',
                 description: 'Home page entry'
             }, {
                 name: 'About',
+                type:'about',
                 x: '',
                 y: '',
                 size: '',
                 description: 'About page entry'
             }, {
                 name: 'Blog',
+                type:'blog',
                 x: '',
                 y: '',
                 size: '',
                 description: 'Blog page entry'
             }, {
                 name: 'Factory',
+                type:'factory',
                 x: '',
                 y: '',
                 size: '',
                 description: 'Factory page entry'
             }, {
                 name: 'Tools',
+                type:'tools',
                 x: '',
                 y: '',
                 size: '',
                 description: 'Tools page entry'
             }, {
                 name: 'Repositories',
+                type:'repositories',
                 x: '',
                 y: '',
                 size: '',
                 description: 'Repositories page entry'
             }, {
                 name: 'Private Forum',
+                type:'forum',
                 x: '',
                 y: '',
                 size: '',
                 description: 'Private forum page entry'
             }, {
                 name: 'Public Forum',
+                type:'forum',
                 x: '',
                 y: '',
                 size: '',
@@ -58,13 +73,13 @@ export default class Navigtor extends Component {
             }],
             position: undefined,
             images: {
-                forum: require('../../../assets/forum.png'),
-                tools:require('../../../assets/tools.png'),
-                blog:require('../../../assets/blog.png'),
-                about:require('../../../assets/about.png'),
-                factory:require('../../../assets/factory.png'),
-                repositories:require('../../../assets/repositories.png'),
-                home:require('../../../assets/home.png')
+                forum: forum,
+                tools: tools,
+                blog: blog,
+                about: about,
+                factory: factory,
+                repositories: repositories,
+                home: home
             }
         }
     }
@@ -113,27 +128,23 @@ export default class Navigtor extends Component {
                 }}
                     data-title={item.description}
                     onMouseEnter={() => {
-                        if(item.name.indexOf(' ') !== -1){
-                            item.name = 'forum';
-                        }
-                        console.log(this.state.images[item.name.toLowerCase()])
+                        
+                    
                         store.dispatch(getTipsContent(
                             {
                                 routeName: item.name.toLowerCase(),
                                 entry: true,
-                                url: this.state.images[item.name.toLowerCase()]
+                                url: this.state.images[item.type]
                             }
                         ));
                     }}
                     onMouseLeave={() => {
-                        if(item.name.indexOf(' ') !== -1){
-                            item.name = 'forum';
-                        }
+                        
                         store.dispatch(getTipsContent(
                             {
                                 routeName: item.name.toLowerCase(),
                                 entry: false,
-                                url: this.state.images[item.name.toLowerCase()]
+                                url: this.state.images[item.type]
                             }
                         ));
                     }}
