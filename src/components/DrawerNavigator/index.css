@@ -1,0 +1,12 @@
+.container{
+    height: 100vh;
+    width: 12vw;
+    background-color: #ffd100;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.navigatorItem{
+    height: 44px;
+    border-radius: 22px;
+}

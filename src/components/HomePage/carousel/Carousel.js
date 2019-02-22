@@ -89,9 +89,14 @@ export default class Carousel extends Component {
         let items = [...this.carouselOptions.current.children];
         console.log(index)
         items.forEach(item => {
-            item.style.transform = 'scale(1)';
+            // if (item.style !== undefined) {
+
+                item.style.transform = 'scale(1)';
+            // }
         });
-        items[index].style.transform = 'scale(1.5)';
+        // if (items.style !== undefined) {
+            items[index].style.transform = 'scale(1.5)';
+        // }
     }
     animationEnd = () => {
         this.carouselAction(this.state.current + 1);

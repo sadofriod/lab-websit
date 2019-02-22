@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './styles/styles.css';
-import { getTipsContent } from '../NavigationTips/actions/tipsCotent'
+import { getTipsContent } from '../NavigationTips/actions/tipsCotent';
+import { withRouter } from 'react-router';
 import store from '../../../stateManage/store';
 import forum from '../../../assets/forum.png';
 import tools from '../../../assets/tools.png';
@@ -9,6 +10,60 @@ import about from '../../../assets/about.png';
 import factory from '../../../assets/factory.png';
 import repositories from '../../../assets/repositories.png';
 import home from '../../../assets/home.png';
+class Navigtors extends Component {
+    constructor(props) {
+        super(props);
+    }
+    navigateToPage = (routeName) =>{
+        this.props.history.push('/'+routeName);
+    }
+    renderNavigators = (position) => {
+        let p = position;
+        return p.map((item, index) => {
+            return (
+                <div key={index} className={styles.navigatorItem} style={{
+                    top: item.y + 'px',
+                    left: item.x * 0.75 + 'px',
+                    fontSize: item.size + 'px',
+                }}
+                    data-title={item.description}
+                    onMouseEnter={() => {
+
+
+                        store.dispatch(getTipsContent(
+                            {
+                                routeName: item.name.toLowerCase(),
+                                entry: true,
+                                url: this.props.images[item.type]
+                            }
+                        ));
+                    }}
+                    onMouseLeave={() => {
+
+                        store.dispatch(getTipsContent(
+                            {
+                                routeName: item.name.toLowerCase(),
+                                entry: false,
+                                url: this.props.images[item.type]
+                            }
+                        ));
+                    }}
+                    onClick = {()=>this.navigateToPage(item.type)}
+                >
+                    {item.name}
+                </div>
+            )
+        });
+    }
+    render() {
+        return (
+            <div className={styles.navigatorGroup}>
+                {this.props.position === undefined ? '' : this.renderNavigators(this.props.position)}
+            </div>
+        )
+    }
+}
+const NavigationItems = withRouter(Navigtors);
 export default class Navigtor extends Component {
     constructor(props) {
         super(props);
@@ -16,56 +71,56 @@ export default class Navigtor extends Component {
         this.state = {
             navigtors: [{
                 name: 'Home',
-                type:'home',
+                type: 'home',
                 x: '',
                 y: '',
                 size: '',
                 description: 'Home page entry'
             }, {
                 name: 'About',
-                type:'about',
+                type: 'about',
                 x: '',
                 y: '',
                 size: '',
                 description: 'About page entry'
             }, {
                 name: 'Blog',
-                type:'blog',
+                type: 'blog',
                 x: '',
                 y: '',
                 size: '',
                 description: 'Blog page entry'
             }, {
                 name: 'Factory',
-                type:'factory',
+                type: 'factory',
                 x: '',
                 y: '',
                 size: '',
                 description: 'Factory page entry'
             }, {
                 name: 'Tools',
-                type:'tools',
+                type: 'tools',
                 x: '',
                 y: '',
                 size: '',
                 description: 'Tools page entry'
             }, {
                 name: 'Repositories',
-                type:'repositories',
+                type: 'repositories',
                 x: '',
                 y: '',
                 size: '',
                 description: 'Repositories page entry'
             }, {
                 name: 'Private Forum',
-                type:'forum',
+                type: 'forum',
                 x: '',
                 y: '',
                 size: '',
                 description: 'Private forum page entry'
             }, {
                 name: 'Public Forum',
-                type:'forum',
+                type: 'forum',
                 x: '',
                 y: '',
                 size: '',
@@ -85,6 +140,8 @@ export default class Navigtor extends Component {
     }
     async componentDidMount() {
         let result = await this.navigtorsPosition();
+        
+
         await this.setState({
             position: result
         });
@@ -128,8 +185,8 @@ export default class Navigtor extends Component {
                 }}
                     data-title={item.description}
                     onMouseEnter={() => {
-                        
-                    
+
+
                         store.dispatch(getTipsContent(
                             {
                                 routeName: item.name.toLowerCase(),
@@ -139,7 +196,7 @@ export default class Navigtor extends Component {
                         ));
                     }}
                     onMouseLeave={() => {
-                        
+
                         store.dispatch(getTipsContent(
                             {
                                 routeName: item.name.toLowerCase(),
@@ -158,10 +215,12 @@ export default class Navigtor extends Component {
         return (
             <div className={styles.container} ref={this.navigtorsArea}>
                 <div className={styles.description}></div>
-                <div className={styles.navigatorGroup}>
+                {/* <div className={styles.navigatorGroup}>
                     {this.state.position === undefined ? '' : this.renderNavigators(this.state.position)}
-                </div>
+                </div> */}
+                <NavigationItems images={this.state.images} position={this.state.position}/>
             </div>
         )
     }
-} 
+}
+
