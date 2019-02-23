@@ -32,6 +32,3 @@
 [data-title]:hover::before{
   display: block;
 }
-.actionPageArea{
-  display: flex;
-}

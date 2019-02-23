@@ -78,25 +78,26 @@ export default class Carousel extends Component {
                         current: 0
                     })
                 }
-                console.log(index * width)
-                this.carouselOptionAction(index);
-                carouselGroup.style.transform = 'translateX(-' + index * width + 'px)'
-                carouselGroup.style.transition = 'transform 1s';
-                clearTimeout(timer);
+                if (index < this.state.carouselItems.length) {
+                    this.carouselOptionAction(index);
+                    carouselGroup.style.transform = 'translateX(-' + index * width + 'px)'
+                    carouselGroup.style.transition = 'transform 1s';
+                    clearTimeout(timer);
+                }
             }, 3000);
     }
     carouselOptionAction = (index) => {
         let items = [...this.carouselOptions.current.children];
-        console.log(index)
+        console.log(items[index], index)
         items.forEach(item => {
             // if (item.style !== undefined) {
 
-                item.style.transform = 'scale(1)';
+            item.style.transform = 'scale(1)';
             // }
         });
-        // if (items.style !== undefined) {
+        if (index < items.length) {
             items[index].style.transform = 'scale(1.5)';
-        // }
+        }
     }
     animationEnd = () => {
         this.carouselAction(this.state.current + 1);

@@ -64,21 +64,22 @@ class DrawerNavigators extends Component {
             }],
         }
     }
-    renderNavigators=()=> ( this.state.navigtors.map(item => (
-            <div className={styles.navigatorItem} 
+    renderNavigators=()=> ( this.state.navigtors.map((item,index) => (
+            <div key={index} className={styles.navigatorItem} 
                 onClick = {()=>
                     this.props.history.push('/'+item.type)
                 }
             >
                 <div className={styles.itemIcon}></div>
-                <div className={styles.itmeWord}></div>
+                <div className={styles.itmeWord}>{item.name}</div>
             </div>
         ))
     )
     render() {
         return (
             <div className={styles.container}>
-                {this.renderNavigators}
+                {this.renderNavigators()}
+                <div className={styles.backButton}></div>
             </div>
         )
     }

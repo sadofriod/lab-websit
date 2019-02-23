@@ -5,8 +5,36 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
+    position: relative;
 }
 .navigatorItem{
-    height: 44px;
+    height: 64px;
     border-radius: 22px;
+}
+.itemIcon{}
+.itmeWord{
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+.backButton{
+    transform: rotate(45deg);
+    border-bottom: solid 3px #000000;
+    border-left: solid 3px #000000;
+    position: absolute;
+    bottom: 30px;
+    height: 15px;
+    width: 15px;
+}
+.backButton::before{
+    content: '';
+    /* transform: rotate(-45deg); */
+    position: absolute;
+    border-radius:50%;
+    border: solid 3px #000000;
+    height: 30px;
+    width: 30px;
+    bottom: -14px;
+    left: -14px;
 }
