@@ -11,6 +11,6 @@ var db = mysql.createPool({
     supportBigNumbers: true,
     bigNumberStrings: true,
     dateStrings: true,
-}); //自定义sql连接池
+}); //连接池
 
 module.exports = db;

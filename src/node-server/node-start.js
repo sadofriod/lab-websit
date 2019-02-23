@@ -4,7 +4,11 @@ var bodyParse = require('body-parser');
 var Config = require('./Config');
 var history = require('connect-history-api-fallback');
 
-app.use(history());
+app.use(history(
+    {
+        htmlAcceptHeaders: ['text/html', 'application/xhtml+xml']
+    }
+));
 
 var port = process.env.PORT || 3001;
 
@@ -22,3 +26,4 @@ app.use(require('./controllers'));
 app.listen(port, function() {
     console.log('Node is listen to port:' + port);
 })
+

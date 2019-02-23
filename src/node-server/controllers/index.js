@@ -3,6 +3,8 @@ var router = express.Router();
 
 router.use('/admin', require('./admin'));
 router.use('/state', require('./state'));
+router.use('/user', require('./user'));
+router.use('/pageController', require('./pageController'));
 
 router.get('/', function(req, res){
     res.render('index');
